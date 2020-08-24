@@ -12,7 +12,6 @@ import com.maxdexter.guesstheword.databinding.FragmentScoreBinding
 
 class ScoreFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,6 +20,13 @@ class ScoreFragment : Fragment() {
         val binding: FragmentScoreBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_score, container, false)
 
 
+        binding.tvScore.text = arguments?.let { ScoreFragmentArgs.fromBundle(it).score.toString() }
+        binding.btnPlayAgain.setOnClickListener { playAgain() }
         return binding.root
     }
+
+    private fun playAgain() {
+        findNavController().navigate(ScoreFragmentDirections.actionScoreFragment2ToGameFragment())
+    }
+
 }

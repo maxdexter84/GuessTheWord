@@ -12,6 +12,8 @@ import com.maxdexter.guesstheword.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
     lateinit var binding: FragmentTitleBinding
+    val score = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +21,7 @@ class TitleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_title,container,false)
-
+        val words = mutableListOf<String>("")
         binding.btnPlay.setOnClickListener { findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment()) }
         return binding.root
     }

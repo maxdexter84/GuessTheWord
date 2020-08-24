@@ -17,10 +17,20 @@
         android:label="GameFragment" >
         <action
             android:id="@+id/action_gameFragment_to_scoreFragment2"
-            app:destination="@id/scoreFragment2" />
+            app:destination="@id/scoreFragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/titleFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoreFragment2"
         android:name="com.maxdexter.guesstheword.screens.score.ScoreFragment"
-        android:label="ScoreFragment" />
+        android:label="ScoreFragment" >
+        <action
+            android:id="@+id/action_scoreFragment2_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <argument
+            android:name="score"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
