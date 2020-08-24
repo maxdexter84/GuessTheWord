@@ -16,11 +16,11 @@
         android:name="com.maxdexter.guesstheword.screens.game.GameFragment"
         android:label="GameFragment" >
         <action
-            android:id="@+id/action_gameFragment_to_scoreFragment"
-            app:destination="@id/scoreFragment" />
+            android:id="@+id/action_gameFragment_to_scoreFragment2"
+            app:destination="@id/scoreFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/scoreFragment"
+        android:id="@+id/scoreFragment2"
         android:name="com.maxdexter.guesstheword.screens.score.ScoreFragment"
         android:label="ScoreFragment" />
 </navigation>

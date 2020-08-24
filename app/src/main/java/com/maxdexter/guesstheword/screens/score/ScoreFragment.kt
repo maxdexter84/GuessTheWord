@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.maxdexter.guesstheword.R
+import com.maxdexter.guesstheword.databinding.FragmentScoreBinding
 
 class ScoreFragment : Fragment() {
 
@@ -14,6 +18,9 @@ class ScoreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val binding: FragmentScoreBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_score, container, false)
+
+
+        return binding.root
     }
 }
