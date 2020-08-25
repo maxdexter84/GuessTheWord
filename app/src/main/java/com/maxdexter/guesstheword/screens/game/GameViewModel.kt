@@ -5,6 +5,7 @@ import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
@@ -16,7 +17,7 @@ class GameViewModel : ViewModel() {
         // This is the number of milliseconds in a second
         const val ONE_SECOND = 1000L
         // This is the total time of the game
-        const val COUNTDOWN_TIME = 100000L
+        const val COUNTDOWN_TIME = 10000L
     }
     private lateinit var timer: CountDownTimer
 
@@ -32,21 +33,13 @@ class GameViewModel : ViewModel() {
         val eventGameFinish: LiveData<Boolean>
                 get() = __eventGameFinish
 
-    private val _timeSec = MutableLiveData<String>()
-        val timeSec: LiveData<String>
+    private val _timeSec = MutableLiveData<Long>()
+        val timeSec: LiveData<Long>
             get() = _timeSec
+    val currentTimeString = Transformations.map(timeSec, { time -> DateUtils.formatElapsedTime(time)})
     lateinit var wordList: MutableList<String>
     init {
-        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
-            override fun onTick(p0: Long) {
-                _timeSec.value = onTimeCreate(p0)
-                Log.i("TAG", " " + p0)
-            }
-            override fun onFinish() {
-                __eventGameFinish.value = true
-            }
-        }.start()
-
+        onTimeCreate()
         __eventGameFinish.value = false
         _score.value = 0
         _word.value = ""
@@ -84,14 +77,16 @@ class GameViewModel : ViewModel() {
         nextWord()
     }
 
-    fun onGameFinishComplit() {
-        __eventGameFinish.value = false
-    }
 
-    fun onTimeCreate(time: Long): String {
-        val sec = time / 1000
-        val strTime = DateUtils.formatElapsedTime(sec)
-        return strTime
+   private fun onTimeCreate() {
+        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
+            override fun onTick(p0: Long) {
+                _timeSec.value = p0 / 1000
+            }
+            override fun onFinish() {
+                __eventGameFinish.value = true
+            }
+        }.start()
     }
 
 

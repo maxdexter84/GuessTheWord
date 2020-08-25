@@ -9,4 +9,6 @@
     <string name="btn_gotIt">GOT IT</string>
     <string name="tv_scored">You scored!</string>
     <string name="btn_playAgain">Play again</string>
+    <string name="str_format">\"%s\"</string>
+    <string name="dig_format">Current score: %d</string>
 </resources>

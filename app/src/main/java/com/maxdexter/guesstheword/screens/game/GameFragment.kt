@@ -30,39 +30,12 @@ class GameFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
         Log.i("TAG", "Called ViewModelProviders")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        binding.gameViewModel = viewModel
+        binding.setLifecycleOwner(this)
 
-        binding.btnGotIt.setOnClickListener {
-            viewModel.onCorrect()
-            updateScoreText()
-            updateWordText()
-        }
-        binding.btnSkip.setOnClickListener {
-            viewModel.onSkip()
-            updateScoreText()
-            updateWordText()
-        }
-
-        updateScoreText()
-        updateWordText()
         gameFinished()
-        updateTimer()
         return binding.root
     }
-
-     fun updateWordText() {
-         viewModel.word.observe(viewLifecycleOwner, Observer { newWord -> binding.tvGuessWord.text = newWord })
-    }
-
-     fun updateScoreText() {
-         viewModel.score.observe(viewLifecycleOwner, {newScore -> binding.tvScore.text = newScore.toString()})
-    }
-
-    fun updateTimer() {
-        viewModel.timeSec.observe(viewLifecycleOwner, {time -> binding.tvTimer.text = time})
-    }
-
-
-
 
 
      fun gameFinished() {
@@ -72,10 +45,5 @@ class GameFragment: Fragment() {
                  Toast.makeText(this.activity,"Game, has finished", Toast.LENGTH_SHORT).show()
              }
          })
-
-
-
     }
-
-
 }
